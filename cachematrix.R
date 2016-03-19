@@ -1,15 +1,39 @@
-## Put comments here that give an overall description of what your
-## functions do
+## makeCacheMatrix creates "class" CacheMatrix, just the same
+## makeVector from the example did. It posesses 4 fields, that can be seen next (where * is)
 
-## Write a short comment describing this function
 
-makeCacheMatrix <- function(x = matrix()) {
+##input: matrix x, size:NxN
+##output: "class" with methods listed below.
 
+makeCacheMatrix <- function(x = numeric()) {
+  inv <- NULL
+  set <- function(y) {
+    x <<- y
+    inv <<- NULL
+  }
+  get <- function() x
+  setinv <- function(input) inv <<- input
+  getinv <- function() inv
+  list(set = set, get = get,
+       setinv = setinv,
+       getinv = getinv)
 }
 
+## cacheSolve tries to find inverted matrix for input (x) in cache, just like in the example. 
+## If it fails to find it, it will compute an return the result.
 
-## Write a short comment describing this function
+
+##output: inverted matrix, size NxN
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  inv <- x$getinv()
+  if(!is.null(inv)) {
+    message("getting cached data")
+    return(inv)
+  }
+  message("computing...")
+  data <- x$get()
+  tmp <- solve(data, ...)
+  x$setinv(tmp)
+  return(tmp)
 }
