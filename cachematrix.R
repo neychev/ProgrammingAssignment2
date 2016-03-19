@@ -22,7 +22,7 @@ makeCacheMatrix <- function(x = numeric()) {
 ## cacheSolve tries to find inverted matrix for input (x) in cache, just like in the example. 
 ## If it fails to find it, it will compute an return the result.
 
-
+##input: matrix x, size:NxN
 ##output: inverted matrix, size NxN
 
 cacheSolve <- function(x, ...) {
